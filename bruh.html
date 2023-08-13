@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .image {
+    flex: 1;
+    max-width: 45%;
+    height: auto;
+    cursor: pointer;
+    transition: filter 0.5s, transform 0.5s;
+    filter: blur(8px); /* Initial blur effect */
+  }
+  
+  .image:hover {
+    filter: none; /* Remove blur effect on hover */
+  }
+  
+  .image-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .image-fullscreen img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+</style>
+</head>
+<body>
+  <div class="image-container">
+    <img class="image" src="1.webp" alt="Blurred Image 1" onclick="openFullscreen(this)">
+    <img class="image" src="2.webp" alt="Blurred Image 2" onclick="openFullscreen(this)">
+  </div>
+
+  <div class="image-fullscreen" id="fullscreen-image-container" onclick="closeFullscreen()">
+    <img id="fullscreen-image" src="" alt="Fullscreen Image">
+  </div>
+
+  <script>
+    function openFullscreen(image) {
+      const fullscreenImage = document.getElementById("fullscreen-image");
+      fullscreenImage.src = image.src;
+      document.getElementById("fullscreen-image-container").style.display = "flex";
+      document.body.style.overflow = "hidden"; // Prevent scrolling when fullscreen is open
+    }
+
+    function closeFullscreen() {
+      document.getElementById("fullscreen-image-container").style.display = "none";
+      document.body.style.overflow = "auto"; // Allow scrolling again
+    }
+  </script>
+</body>
+</html>
